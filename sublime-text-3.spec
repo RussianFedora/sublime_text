@@ -1,21 +1,22 @@
 # Let's disable compilation of Python scripts and modules and debug packages.
 %global __os_install_post %(echo '%{__os_install_post}' | sed -e 's!/usr/lib[^[:space:]]*/brp-python-bytecompile[[:space:]].*$!!g')
 %define debug_package %{nil}
+%define revbuild 3083
 
-Name: sublime_text
-Version: 3.0
-Release: 3083
-Group: Applications/Editors
-%ifarch x86_64
-Source: http://c758482.r82.cf2.rackcdn.com/%{name}_3_build_%{release}_x64.tar.bz2
-%else
-Source: http://c758482.r82.cf2.rackcdn.com/%{name}_3_build_%{release}_x32.tar.bz2
-%endif
 Summary: Sublime Text 3
+Name: sublime_text
+Version: 3.0.%{revbuild}
+Release: 1%{?dist}
+
+Group: Applications/Editors
 URL: http://www.sublimetext.com/3
 License: EULA
-BuildRoot: %{_tmppath}/%{name}-root
-Vendor: Sublime Text Authors
+%ifarch x86_64
+Source: http://c758482.r82.cf2.rackcdn.com/%{name}_3_build_%{revbuild}_x64.tar.bz2
+%else
+Source: http://c758482.r82.cf2.rackcdn.com/%{name}_3_build_%{revbuild}_x32.tar.bz2
+%endif
+
 Requires: glib2
 Requires: glibc
 Requires: libX11
@@ -26,6 +27,7 @@ Requires: libstdc++
 Requires: libxcb
 Requires: pcre
 Requires: zlib
+
 Obsoletes: sublimetext
 
 %description
@@ -72,6 +74,5 @@ find %{buildroot} -not -type d -printf "\"/%%P\"\n" | sed '/\/man\//s/$/\*/' > m
 %files -f manifest
 
 %changelog
-* Mon Jun 15 2015 karter <fp.karter@gmail.com>
-- Updated SPEC for Sublime Text 3.
-
+* Mon Nov 16 2015 Arkady L. Shane <ashejn@russiandedora.pro> - 3.0.3083-1.R
+- merge spec from karter <fp.karter@gmail.com>
