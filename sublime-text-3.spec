@@ -11,11 +11,8 @@ Release: 1%{?dist}
 Group: Applications/Editors
 URL: http://www.sublimetext.com/3
 License: EULA
-%ifarch x86_64
-Source: http://c758482.r82.cf2.rackcdn.com/%{name}_3_build_%{revbuild}_x64.tar.bz2
-%else
-Source: http://c758482.r82.cf2.rackcdn.com/%{name}_3_build_%{revbuild}_x32.tar.bz2
-%endif
+Source0: http://c758482.r82.cf2.rackcdn.com/%{name}_3_build_%{revbuild}_x64.tar.bz2
+Source1: http://c758482.r82.cf2.rackcdn.com/%{name}_3_build_%{revbuild}_x32.tar.bz2
 
 Requires: glib2
 Requires: glibc
@@ -34,7 +31,11 @@ Obsoletes: sublimetext
 Sublime Text 3 for GNU/Linux is a sophisticated text editor for code, markup and prose.
 
 %prep
-%setup -q -c -n %{name}
+%ifarch x86_64
+%setup -q -c -a0 -n %{name}
+%else
+%setup -q -c -a1 -n %{name}
+%endif
 
 %build
 # Do nothing...
