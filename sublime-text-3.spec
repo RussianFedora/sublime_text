@@ -1,3 +1,6 @@
+# spec merged from https://github.com/xvitaly/sublrpm/blob/master/sublime.spec
+# issue #1 https://github.com/RussianFedora/sublime_text/issues/1
+
 # Let's disable compilation of Python scripts and modules and debug packages.
 %global __os_install_post %(echo '%{__os_install_post}' | sed -e 's!/usr/lib[^[:space:]]*/brp-python-bytecompile[[:space:]].*$!!g')
 %define debug_package %{nil}
@@ -77,3 +80,9 @@ find %{buildroot} -not -type d -printf "\"/%%P\"\n" | sed '/\/man\//s/$/\*/' > m
 %changelog
 * Mon Nov 16 2015 Arkady L. Shane <ashejn@russiandedora.pro> - 3.0.3083-1.R
 - merge spec from karter <fp.karter@gmail.com>
+
+* Sat Jan 24 2015 V1TSK <vitaly@easycoding.org>
+- Updated SPEC for Sublime Text 3 support.
+
+* Sun Dec 21 2014 V1TSK <vitaly@easycoding.org>
+- Updated SPEC and desktop files for openSUSE 13.2 and Fedora 21+ support.
