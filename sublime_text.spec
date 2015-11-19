@@ -31,7 +31,8 @@ Requires: zlib
 Obsoletes: sublimetext
 
 %description
-Sublime Text 3 for GNU/Linux is a sophisticated text editor for code, markup and prose.
+Sublime Text 3 for GNU/Linux is a sophisticated text editor for code, markup
+and prose.
 
 %prep
 %ifarch x86_64
