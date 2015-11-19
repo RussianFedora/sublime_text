@@ -9,7 +9,7 @@
 Summary: Sublime Text 3
 Name: sublime_text
 Version: 3.0.%{revbuild}
-Release: 1%{?dist}
+Release: 2%{?dist}
 
 Group: Applications/Editors
 URL: http://www.sublimetext.com/3
@@ -28,7 +28,7 @@ Requires: libxcb
 Requires: pcre
 Requires: zlib
 
-Obsoletes: sublimetext
+Obsoletes: sublimetext < %{version}
 
 %description
 Sublime Text 3 for GNU/Linux is a sophisticated text editor for code, markup
@@ -79,6 +79,11 @@ find %{buildroot} -not -type d -printf "\"/%%P\"\n" | sed '/\/man\//s/$/\*/' > m
 %files -f manifest
 
 %changelog
+* Thu Nov 19 2015 Arkady L. Shane <ashejn@russiandedora.pro> - 3.0.3083-2.R
+- fix issue with copyrights http://github.com/RussianFedora/sublime_text/issues/1
+- rename spec
+- define version in Obsoletes
+
 * Mon Nov 16 2015 Arkady L. Shane <ashejn@russiandedora.pro> - 3.0.3083-1.R
 - merge spec from karter <fp.karter@gmail.com>
 
