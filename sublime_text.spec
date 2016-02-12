@@ -83,14 +83,22 @@ fi
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 
 %changelog
-* Fri Feb 12 2016 V1TSK <vitaly@easycoding.org> - 3.0.3103-2
-- Fixed SPEC.
+* Fri Feb 12 2016 V1TSK <vitaly@easycoding.org> - 3.0.3103-2.R
+- Fixed SPEC. Updated to 3.0.3103-2.
 
-* Thu Feb 11 2016 V1TSK <vitaly@easycoding.org> - 3.0.3103-1
+* Thu Feb 11 2016 V1TSK <vitaly@easycoding.org> - 3.0.3103-1.R
 - Updated SPEC to latest Sublime Text 3 version.
 
-* Sat Jan 24 2015 V1TSK <vitaly@easycoding.org> - 3.0.3083-1
+* Thu Nov 19 2015 Arkady L. Shane <ashejn@russiandedora.pro> - 3.0.3083-2.R
+- fix issue with copyrights http://github.com/RussianFedora/sublime_text/issues/1
+- rename spec
+- define version in Obsoletes
+
+* Mon Nov 16 2015 Arkady L. Shane <ashejn@russiandedora.pro> - 3.0.3083-1.R
+- merge spec from karter <fp.karter@gmail.com>
+
+* Sat Jan 24 2015 V1TSK <vitaly@easycoding.org> - 3.0.3083-1.R
 - Updated SPEC for Sublime Text 3 support.
 
-* Sun Dec 21 2014 V1TSK <vitaly@easycoding.org> - 2.0.2-1
+* Sun Dec 21 2014 V1TSK <vitaly@easycoding.org> - 2.0.2-1.R
 - Updated SPEC and desktop files for openSUSE 13.2 and Fedora 21+ support.
