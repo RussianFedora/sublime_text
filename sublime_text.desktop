@@ -1,0 +1,12 @@
+[Desktop Entry]
+GenericName=Text Editor
+GenericName[ru]=Текстовый редактор
+Name=Sublime Text 3
+Name[ru]=Sublime Text 3
+Comment=Edit text files
+Exec=/opt/sublime_text/sublime_text
+Icon=sublime_text
+Terminal=false
+Type=Application
+Categories=Utility;TextEditor;
+MimeType=text/plain;text/x-c++src;text/x-c++hdr;text/x-xsrc;text/html;text/javascript;text/php;text/xml;text/cmd;text/css;text/x-asm;text/x-c;text/csv;text/x-fortran;text/calendar;text/x-java-source;text/x-pascal;text/tab-separated-values;text/x-uuencode;text/x-vcalendar;text/x-vcard;text/yaml;

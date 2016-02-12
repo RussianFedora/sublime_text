@@ -1,34 +1,20 @@
-# spec merged from https://github.com/xvitaly/sublrpm/blob/master/sublime.spec
-# issue #1 https://github.com/RussianFedora/sublime_text/issues/1
+%global debug_package %{nil}
+%global revision 3103
 
-# Let's disable compilation of Python scripts and modules and debug packages.
-%global __os_install_post %(echo '%{__os_install_post}' | sed -e 's!/usr/lib[^[:space:]]*/brp-python-bytecompile[[:space:]].*$!!g')
-%define debug_package %{nil}
-%define revbuild 3083
-
-Summary: Sublime Text 3
 Name: sublime_text
-Version: 3.0.%{revbuild}
+Version: 3.0.%{revision}
 Release: 2%{?dist}
+Summary: Sublime Text 3
 
-Group: Applications/Editors
+Source0: https://download.sublimetext.com/%{name}_3_build_%{revision}_x64.tar.bz2
+Source1: https://download.sublimetext.com/%{name}_3_build_%{revision}_x32.tar.bz2
+Source2: %{name}.desktop
+
 URL: http://www.sublimetext.com/3
 License: EULA
-Source0: http://c758482.r82.cf2.rackcdn.com/%{name}_3_build_%{revbuild}_x64.tar.bz2
-Source1: http://c758482.r82.cf2.rackcdn.com/%{name}_3_build_%{revbuild}_x32.tar.bz2
 
-Requires: glib2
-Requires: glibc
-Requires: libX11
-Requires: libXau
-Requires: libffi
-Requires: libgcc
-Requires: libstdc++
-Requires: libxcb
-Requires: pcre
-Requires: zlib
-
-Obsoletes: sublimetext < %{version}
+BuildRequires: desktop-file-utils
+Obsoletes: sublimetext
 
 %description
 Sublime Text 3 for GNU/Linux is a sophisticated text editor for code, markup
@@ -36,59 +22,75 @@ and prose.
 
 %prep
 %ifarch x86_64
-%setup -q -c -a0 -n %{name}
+%setup -q -T -b 0 -n %{name}_3
 %else
-%setup -q -c -a1 -n %{name}
+%setup -q -T -b 1 -n %{name}_3
 %endif
 
 %build
 # Do nothing...
 
 %install
-# Unpacking...
-rm -rf %{buildroot}
-
 # Creating general directories...
 mkdir -p %{buildroot}/usr/share/applications/
 mkdir -p %{buildroot}/opt/%{name}/
+mkdir -p %{buildroot}%{_datadir}/icons/hicolor/{256x256,128x128,48x48,32x32,16x16}/apps/
 
 # Installing to working directory from official package...
-mv "%_builddir/%{name}/sublime_text_3" %_builddir/%{name}/%{name}
-cp -fpr %_builddir/%{name}/%{name}/* %{buildroot}/opt/%{name}/
-rm -f %{buildroot}/opt/%{name}/sublime_text.desktop
-chmod +x %{buildroot}/opt/%{name}/sublime_text
+mv %_builddir/%{name}_3/* %{buildroot}/opt/%{name}/
+
+# Removing build-in desktop file...
+rm -f %{buildroot}/opt/%{name}/%{name}.desktop
+
+# Installing icons...
+mv %{buildroot}/opt/%{name}/Icon/256x256/sublime-text.png %{buildroot}%{_datadir}/icons/hicolor/256x256/apps/%{name}.png
+mv %{buildroot}/opt/%{name}/Icon/128x128/sublime-text.png %{buildroot}%{_datadir}/icons/hicolor/128x128/apps/%{name}.png
+mv %{buildroot}/opt/%{name}/Icon/48x48/sublime-text.png %{buildroot}%{_datadir}/icons/hicolor/48x48/apps/%{name}.png
+mv %{buildroot}/opt/%{name}/Icon/32x32/sublime-text.png %{buildroot}%{_datadir}/icons/hicolor/32x32/apps/%{name}.png
+mv %{buildroot}/opt/%{name}/Icon/16x16/sublime-text.png %{buildroot}%{_datadir}/icons/hicolor/16x16/apps/%{name}.png
+
+# Marking as executtable...
+chmod +x %{buildroot}/opt/%{name}/%{name}
 
 # Creating desktop icon...
-echo "[Desktop Entry]" > %{buildroot}/usr/share/applications/%{name}.desktop
-echo "GenericName=Text Editor" >> %{buildroot}/usr/share/applications/%{name}.desktop
-echo "GenericName[ru]=Текстовый редактор" >> %{buildroot}/usr/share/applications/%{name}.desktop
-echo "Name=Sublime Text 3" >> %{buildroot}/usr/share/applications/%{name}.desktop
-echo "Name[ru]=Sublime Text 3" >> %{buildroot}/usr/share/applications/%{name}.desktop
-echo "Comment=Edit text files" >> %{buildroot}/usr/share/applications/%{name}.desktop
-echo "Exec=/opt/%{name}/sublime_text" >> %{buildroot}/usr/share/applications/%{name}.desktop
-echo "Icon=/opt/%{name}/Icon/256x256/sublime-text.png" >> %{buildroot}/usr/share/applications/%{name}.desktop
-echo "Terminal=false" >> %{buildroot}/usr/share/applications/%{name}.desktop
-echo "Type=Application" >> %{buildroot}/usr/share/applications/%{name}.desktop
-echo "Encoding=UTF-8" >> %{buildroot}/usr/share/applications/%{name}.desktop
-echo "Categories=Utility;TextEditor;" >> %{buildroot}/usr/share/applications/%{name}.desktop
-echo "MimeType=text/plain;text/x-c++src;text/x-c++hdr;text/x-xsrc;text/html;text/javascript;text/php;text/xml;" >> %{buildroot}/usr/share/applications/%{name}.desktop
+desktop-file-install --dir=%{buildroot}%{_datadir}/applications %{SOURCE2}
 
-# Generating list of files...
-find %{buildroot} -not -type d -printf "\"/%%P\"\n" | sed '/\/man\//s/$/\*/' > manifest
+%post
+/bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
+/usr/bin/update-desktop-database &> /dev/null || :
 
-%files -f manifest
+%postun
+if [ $1 -eq 0 ] ; then
+    /bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null
+    /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
+fi
+/usr/bin/update-desktop-database &> /dev/null || :
+
+%posttrans
+/usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
+
+%files
+%dir /opt/%{name}
+/opt/%{name}/plugin_host
+/opt/%{name}/%{name}
+/opt/%{name}/python3.3.zip
+/opt/%{name}/changelog.txt
+/opt/%{name}/Packages/*.sublime-package
+/opt/%{name}/sublime_plugin.py*
+/opt/%{name}/sublime.py*
+/opt/%{name}/crash_reporter
+%{_datadir}/applications/%{name}.desktop
+%{_datadir}/icons/hicolor/*/apps/%{name}.png
 
 %changelog
-* Thu Nov 19 2015 Arkady L. Shane <ashejn@russiandedora.pro> - 3.0.3083-2.R
-- fix issue with copyrights http://github.com/RussianFedora/sublime_text/issues/1
-- rename spec
-- define version in Obsoletes
+* Fri Feb 12 2016 V1TSK <vitaly@easycoding.org> - 3.0.3103-2
+- Fixed SPEC.
 
-* Mon Nov 16 2015 Arkady L. Shane <ashejn@russiandedora.pro> - 3.0.3083-1.R
-- merge spec from karter <fp.karter@gmail.com>
+* Thu Feb 11 2016 V1TSK <vitaly@easycoding.org> - 3.0.3103-1
+- Updated SPEC to latest Sublime Text 3 version.
 
-* Sat Jan 24 2015 V1TSK <vitaly@easycoding.org>
+* Sat Jan 24 2015 V1TSK <vitaly@easycoding.org> - 3.0.3083-1
 - Updated SPEC for Sublime Text 3 support.
 
-* Sun Dec 21 2014 V1TSK <vitaly@easycoding.org>
+* Sun Dec 21 2014 V1TSK <vitaly@easycoding.org> - 2.0.2-1
 - Updated SPEC and desktop files for openSUSE 13.2 and Fedora 21+ support.
