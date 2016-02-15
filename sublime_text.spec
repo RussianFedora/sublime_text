@@ -3,12 +3,12 @@
 
 Name: sublime_text
 Version: 3.0.%{revision}
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: Sublime Text 3
 
 Source0: https://download.sublimetext.com/%{name}_3_build_%{revision}_x64.tar.bz2
 Source1: https://download.sublimetext.com/%{name}_3_build_%{revision}_x32.tar.bz2
-Source2: %{name}.desktop
+Source2: https://github.com/RussianFedora/sublime_text/raw/master/%{name}.desktop
 
 URL: http://www.sublimetext.com/3
 License: EULA
@@ -49,6 +49,9 @@ mv %{buildroot}/opt/%{name}/Icon/48x48/sublime-text.png %{buildroot}%{_datadir}/
 mv %{buildroot}/opt/%{name}/Icon/32x32/sublime-text.png %{buildroot}%{_datadir}/icons/hicolor/32x32/apps/%{name}.png
 mv %{buildroot}/opt/%{name}/Icon/16x16/sublime-text.png %{buildroot}%{_datadir}/icons/hicolor/16x16/apps/%{name}.png
 
+# Removing empty directories...
+rm -rf %{buildroot}/opt/%{name}/Icon
+
 # Marking as executtable...
 chmod +x %{buildroot}/opt/%{name}/%{name}
 
@@ -70,19 +73,14 @@ fi
 /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 %files
-%dir /opt/%{name}
-/opt/%{name}/plugin_host
-/opt/%{name}/%{name}
-/opt/%{name}/python3.3.zip
-/opt/%{name}/changelog.txt
-/opt/%{name}/Packages/*.sublime-package
-/opt/%{name}/sublime_plugin.py*
-/opt/%{name}/sublime.py*
-/opt/%{name}/crash_reporter
+/opt/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 
 %changelog
+* Mon Feb 15 2016 V1TSK <vitaly@easycoding.org> - 3.0.3103-3.R
+- Updated to 3.0.3103-3.
+
 * Fri Feb 12 2016 V1TSK <vitaly@easycoding.org> - 3.0.3103-2.R
 - Fixed SPEC. Updated to 3.0.3103-2.
 
