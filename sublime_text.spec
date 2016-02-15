@@ -79,7 +79,7 @@ fi
 
 %changelog
 * Mon Feb 15 2016 V1TSK <vitaly@easycoding.org> - 3.0.3103-3.R
-- Updated to 3.0.3103-3.
+- Fixed file list owned by package.
 
 * Fri Feb 12 2016 V1TSK <vitaly@easycoding.org> - 3.0.3103-2.R
 - Fixed SPEC. Updated to 3.0.3103-2.
