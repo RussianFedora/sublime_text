@@ -1,9 +1,9 @@
 %global debug_package %{nil}
-%global revision 3103
+%global revision 3114
 
 Name: sublime_text
 Version: 3.0.%{revision}
-Release: 3%{?dist}
+Release: 1%{?dist}
 Summary: Sublime Text 3
 
 Source0: https://download.sublimetext.com/%{name}_3_build_%{revision}_x64.tar.bz2
@@ -78,6 +78,9 @@ fi
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 
 %changelog
+* Fri May 13 2016 Arkady L. Shane <ashejn@russianfedora.pro> - 3.0.3114-1.R
+- update to 3.0.3114
+
 * Mon Feb 15 2016 V1TSK <vitaly@easycoding.org> - 3.0.3103-3.R
 - Fixed file list owned by package.
 
