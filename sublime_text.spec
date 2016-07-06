@@ -3,7 +3,7 @@
 
 Name: sublime_text
 Version: 3.0.%{revision}
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Sublime Text 3
 
 Source0: https://download.sublimetext.com/%{name}_3_build_%{revision}_x64.tar.bz2
@@ -78,16 +78,19 @@ fi
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 
 %changelog
+* Wed Jul 06 2016 Vitaly Zaitsev <vitaly@easycoding.org> - 3.0.3114-2.R
+- Updated desktop file. Fixed issue with Gnome 3.
+
 * Fri May 13 2016 Arkady L. Shane <ashejn@russianfedora.pro> - 3.0.3114-1.R
 - update to 3.0.3114
 
-* Mon Feb 15 2016 V1TSK <vitaly@easycoding.org> - 3.0.3103-3.R
+* Mon Feb 15 2016 Vitaly Zaitsev <vitaly@easycoding.org> - 3.0.3103-3.R
 - Fixed file list owned by package.
 
-* Fri Feb 12 2016 V1TSK <vitaly@easycoding.org> - 3.0.3103-2.R
+* Fri Feb 12 2016 Vitaly Zaitsev <vitaly@easycoding.org> - 3.0.3103-2.R
 - Fixed SPEC. Updated to 3.0.3103-2.
 
-* Thu Feb 11 2016 V1TSK <vitaly@easycoding.org> - 3.0.3103-1.R
+* Thu Feb 11 2016 Vitaly Zaitsev <vitaly@easycoding.org> - 3.0.3103-1.R
 - Updated SPEC to latest Sublime Text 3 version.
 
 * Thu Nov 19 2015 Arkady L. Shane <ashejn@russiandedora.pro> - 3.0.3083-2.R
@@ -98,8 +101,8 @@ fi
 * Mon Nov 16 2015 Arkady L. Shane <ashejn@russiandedora.pro> - 3.0.3083-1.R
 - merge spec from karter <fp.karter@gmail.com>
 
-* Sat Jan 24 2015 V1TSK <vitaly@easycoding.org> - 3.0.3083-1.R
+* Sat Jan 24 2015 Vitaly Zaitsev <vitaly@easycoding.org> - 3.0.3083-1.R
 - Updated SPEC for Sublime Text 3 support.
 
-* Sun Dec 21 2014 V1TSK <vitaly@easycoding.org> - 2.0.2-1.R
+* Sun Dec 21 2014 Vitaly Zaitsev <vitaly@easycoding.org> - 2.0.2-1.R
 - Updated SPEC and desktop files for openSUSE 13.2 and Fedora 21+ support.
