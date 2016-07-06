@@ -14,6 +14,7 @@ URL: http://www.sublimetext.com/3
 License: EULA
 
 BuildRequires: desktop-file-utils
+Requires: hicolor-icon-theme
 Obsoletes: sublimetext
 
 %description
@@ -79,7 +80,7 @@ fi
 
 %changelog
 * Wed Jul 06 2016 Vitaly Zaitsev <vitaly@easycoding.org> - 3.0.3114-2.R
-- Updated desktop file. Fixed issue with Gnome 3.
+- Updated desktop file. Fixed issue with Gnome 3. Updated Requires.
 
 * Fri May 13 2016 Arkady L. Shane <ashejn@russianfedora.pro> - 3.0.3114-1.R
 - update to 3.0.3114
