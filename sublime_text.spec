@@ -1,9 +1,9 @@
 %global debug_package %{nil}
-%global revision 3114
+%global revision 3124
 
 Name: sublime_text
 Version: 3.0.%{revision}
-Release: 2%{?dist}
+Release: 1%{?dist}
 Summary: Sublime Text 3
 
 Source0: https://download.sublimetext.com/%{name}_3_build_%{revision}_x64.tar.bz2
@@ -79,6 +79,9 @@ fi
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 
 %changelog
+* Thu Sep 22 2016 Vitaly Zaitsev <vitaly@easycoding.org> - 3.0.3124-1.R
+- Updated to 3.0.3124.
+
 * Wed Jul 06 2016 Vitaly Zaitsev <vitaly@easycoding.org> - 3.0.3114-2.R
 - Updated desktop file. Fixed issue with Gnome 3. Updated Requires.
 
