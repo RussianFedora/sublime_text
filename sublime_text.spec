@@ -1,5 +1,5 @@
 %global debug_package %{nil}
-%global revision 3124
+%global revision 3126
 
 Name: sublime_text
 Version: 3.0.%{revision}
@@ -79,6 +79,9 @@ fi
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 
 %changelog
+* Sat Sep 24 2016 Vitaly Zaitsev <vitaly@easycoding.org> - 3.0.3126-1.R
+- Updated to 3.0.3126.
+
 * Thu Sep 22 2016 Vitaly Zaitsev <vitaly@easycoding.org> - 3.0.3124-1.R
 - Updated to 3.0.3124.
 
