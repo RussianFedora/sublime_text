@@ -15,7 +15,15 @@ License: EULA
 
 BuildRequires: desktop-file-utils
 Requires: hicolor-icon-theme
-Obsoletes: sublimetext
+
+# Provide additional names for package manager.
+Provides: sublimetext = %{?epoch:%{epoch}:}%{version}-%{release}
+Obsoletes: sublimetext < %{?epoch:%{epoch}:}%{version}-%{release}
+Provides: sublimetext3 = %{?epoch:%{epoch}:}%{version}-%{release}
+Obsoletes: sublimetext3 < %{?epoch:%{epoch}:}%{version}-%{release}
+
+# Conflicts with official malformed package.
+Conflicts: sublime-text
 
 %description
 Sublime Text 3 for GNU/Linux is a sophisticated text editor for code, markup
