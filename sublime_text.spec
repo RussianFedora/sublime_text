@@ -3,7 +3,7 @@
 
 Name: sublime_text
 Version: 3.0.%{revision}
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Sublime Text 3
 
 Source0: https://download.sublimetext.com/%{name}_3_build_%{revision}_x64.tar.bz2
@@ -14,6 +14,8 @@ URL: http://www.sublimetext.com/3
 License: EULA
 
 BuildRequires: desktop-file-utils
+Requires(post): %{_sbindir}/update-alternatives
+Requires(postun): %{_sbindir}/update-alternatives
 Requires: hicolor-icon-theme
 
 # Provide additional names for package manager.
@@ -41,9 +43,13 @@ and prose.
 
 %install
 # Creating general directories...
+mkdir -p %{buildroot}%{_bindir}
 mkdir -p %{buildroot}/usr/share/applications/
 mkdir -p %{buildroot}/opt/%{name}/
 mkdir -p %{buildroot}%{_datadir}/icons/hicolor/{256x256,128x128,48x48,32x32,16x16}/apps/
+
+# Creating ghost file for alternatives system...
+touch %{buildroot}%{_bindir}/%{name}
 
 # Installing to working directory from official package...
 mv %_builddir/%{name}_3/* %{buildroot}/opt/%{name}/
@@ -68,10 +74,12 @@ chmod +x %{buildroot}/opt/%{name}/%{name}
 desktop-file-install --dir=%{buildroot}%{_datadir}/applications %{SOURCE2}
 
 %post
+%{_sbindir}/update-alternatives --install %{_bindir}/%{name} %{name} /opt/%{name}/%{name} 10
 /bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
 
 %postun
 if [ $1 -eq 0 ] ; then
+    %{_sbindir}/update-alternatives --remove %{name} /opt/%{name}/%{name}
     /bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null
     /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 fi
@@ -81,10 +89,14 @@ fi
 
 %files
 /opt/%{name}
+%ghost %{_bindir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 
 %changelog
+* Sat Oct 28 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 3.0.3143-2
+- Use alternatives to provide /usr/bin/sublime_text binary.
+
 * Thu Sep 14 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 3.0.3143-1.R
 - Updated to 3.0.3143 (release).
 
