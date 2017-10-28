@@ -44,7 +44,7 @@ and prose.
 %install
 # Creating general directories...
 mkdir -p %{buildroot}%{_bindir}
-mkdir -p %{buildroot}/usr/share/applications/
+mkdir -p %{buildroot}%{_datadir}/applications/
 mkdir -p %{buildroot}/opt/%{name}/
 mkdir -p %{buildroot}%{_datadir}/icons/hicolor/{256x256,128x128,48x48,32x32,16x16}/apps/
 
