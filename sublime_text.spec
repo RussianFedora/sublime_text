@@ -75,17 +75,11 @@ desktop-file-install --dir=%{buildroot}%{_datadir}/applications %{SOURCE2}
 
 %post
 %{_sbindir}/update-alternatives --install %{_bindir}/%{name} %{name} /opt/%{name}/%{name} 10
-/bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
 
 %postun
 if [ $1 -eq 0 ] ; then
     %{_sbindir}/update-alternatives --remove %{name} /opt/%{name}/%{name}
-    /bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null
-    /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 fi
-
-%posttrans
-/usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 %files
 /opt/%{name}
