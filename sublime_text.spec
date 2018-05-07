@@ -1,9 +1,9 @@
 %global debug_package %{nil}
-%global revision 3143
+%global revision 3170
 
 Name: sublime_text
-Version: 3.0.%{revision}
-Release: 2%{?dist}
+Version: 3.1.%{revision}
+Release: 1%{?dist}
 Summary: Sublime Text 3
 
 Source0: https://download.sublimetext.com/%{name}_3_build_%{revision}_x64.tar.bz2
@@ -88,6 +88,9 @@ fi
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 
 %changelog
+* Mon May 07 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 3.1.3170-1
+- Updated to 3.1.3170 (release).
+
 * Sat Oct 28 2017 Vitaly Zaitsev <vitaly@easycoding.org> - 3.0.3143-2
 - Use alternatives to provide /usr/bin/sublime_text binary.
 
