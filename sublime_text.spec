@@ -2,7 +2,7 @@
 %global revision 3176
 
 Name: sublime_text
-Version: 3.1.1.%{revision}
+Version: 3.1.%{revision}
 Release: 1%{?dist}
 Summary: Sublime Text 3
 
@@ -88,8 +88,8 @@ fi
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 
 %changelog
-* Mon May 14 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 3.1.1.3176-1
-- Updated to 3.1.1.3176 (release).
+* Tue May 15 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 3.1.3176-1
+- Updated to 3.1.3176 (release).
 
 * Mon May 07 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 3.1.3170-1
 - Updated to 3.1.3170 (release).
