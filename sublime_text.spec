@@ -1,8 +1,8 @@
 %global debug_package %{nil}
-%global revision 3176
+%global revision 3211
 
 Name: sublime_text
-Version: 3.1.%{revision}
+Version: 3.2.2.%{revision}
 Release: 1%{?dist}
 Summary: Sublime Text 3
 
@@ -10,7 +10,7 @@ Source0: https://download.sublimetext.com/%{name}_3_build_%{revision}_x64.tar.bz
 Source1: https://download.sublimetext.com/%{name}_3_build_%{revision}_x32.tar.bz2
 Source2: https://github.com/RussianFedora/sublime_text/raw/master/%{name}.desktop
 
-URL: http://www.sublimetext.com/3
+URL: https://www.sublimetext.com/3
 License: EULA
 
 BuildRequires: desktop-file-utils
@@ -88,6 +88,9 @@ fi
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 
 %changelog
+* Thu Nov 21 2019 Vitaly Zaitsev <vitaly@easycoding.org> - 3.2.2.3211-1
+- Updated to 3.2.2.3211 (release).
+
 * Tue May 15 2018 Vitaly Zaitsev <vitaly@easycoding.org> - 3.1.3176-1
 - Updated to 3.1.3176 (release).
 
